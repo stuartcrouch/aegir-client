@@ -1,8 +1,5 @@
 - hosts: web
-  vars_prompt:
-    - name: aegir_fqdn
-      prompt: "Please enter the FQDN of this host"
-      private: no
+
   roles:
     - common
     - web

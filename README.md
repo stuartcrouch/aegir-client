@@ -2,8 +2,8 @@
 
 This script installs all required RPMs to allow aegir to create drupal sites
 
-It will ask for the FQDN and the password you want to use for the mariaDB admin account.
-It will also ask for the IP address of the aegir server, and the username + password aegir will use to talk to mysql.
+It will ask for the password you want to use for the mariaDB admin account.
+It will also ask for the IP address of the aegir server that will manage this machine, and the username + password aegir will use to talk to mysql.
 
 To install, switch to root and run
 ```

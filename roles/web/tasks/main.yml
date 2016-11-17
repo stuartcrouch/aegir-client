@@ -27,7 +27,5 @@
   lineinfile: dest=/etc/php.ini line="memory_limit = 192M" regexp="^memory_limit"
 - name: Configure php timezone
   lineinfile: dest=/etc/php.ini line='date.timezone = Europe/London' regexp='^.*date.timezone ='
-- name: configure hosts file
-  lineinfile: dest=/etc/hosts line="{{ ansible_default_ipv4['address'] }}  {{ aegir_fqdn }}"
 
 
