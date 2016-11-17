@@ -7,7 +7,7 @@ It will also ask for the IP address of the aegir server that will manage this ma
 
 To install, switch to root and run
 ```
-yum -y install git;git clone https://github.com/stuartcrouch/aegir-client.git;cd ansible-aegir;./run.sh
+yum -y install git;git clone https://github.com/stuartcrouch/aegir-client.git;cd aegir-client;./run.sh
 ```
 
 When upgrading ansible, you must upgrade drush yourself. This script uses drush to install aegir, so aegir cant upgrade it.
