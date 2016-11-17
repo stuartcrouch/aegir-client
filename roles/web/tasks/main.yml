@@ -4,10 +4,12 @@
   yum: name=httpd state=present
 - name: Enable and start apache
   service: name=httpd enabled=yes
+- name: Create www-data group 
+  group: name=www-data state=present
 - name: Modify apache user
-  user: name=apache groups=aegir
+  user: name=apache groups=aegir,www-data
 - name: Modify aegir user
-  user: name=aegir groups=apache
+  user: name=aegir groups=apache,www-data
 - name: Install required packages
   yum: name={{ item }} state=present
   with_items:
