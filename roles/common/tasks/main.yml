@@ -1,6 +1,6 @@
 ---
 # file: roles/common/tasks/main.yml
 - name: Create aegir user
-  user: name={{ aegir_user }} uid={{ aegir_uid }} shell=/bin/bash home={{ aegir_home }} createhome=yes comment='Aegir User'
+  user: name={{ aegir_user }} uid={{ aegir_uid }} password=encryptthis shell=/bin/bash home={{ aegir_home }} createhome=yes comment='Aegir User'
 - name: set aegir home perms
   file: path={{ aegir_home }} mode=755
