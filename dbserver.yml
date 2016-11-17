@@ -1,0 +1,17 @@
+---
+# file: dbserver.yml
+- hosts: db
+  vars_prompt:
+    - name: mysql_root_pass
+      prompt: "Please enter the root password to set for MySQL"
+      private: yes
+    - name: aegir_server_ip
+      prompt: "Please enter the IP address of the aegir master server"
+    - name: aegir_username
+      prompt: "Please enter the username that aegir will use to connect (aegir recommends 'root')"
+    - name: aegir_password
+      prompt: "Please enter the password that aegir will use to connect"
+      private: yes
+  roles:
+    - common
+    - db

@@ -1,0 +1,31 @@
+---
+# File: roles/db/tasks/main.yml
+- name: Install Mariadb
+  yum: name="mariadb-server" state=present
+- name: Install MySQL python module
+  yum: name=MySQL-python state=present
+- name: Enable and start Mariadb
+  service: name=mariadb state=started enabled=yes
+- name: Set MySQL root Pass
+  mysql_user: name=root password={{ mysql_root_pass }} host=localhost
+  ignore_errors: yes
+- name: Create temporary ~/.my.cnf of MySQL functions
+  template: src=setup.my.cnf.js2 dest=~/.my.cnf mode=0700
+- name: Remove MySQL anonymous users for localhost
+  mysql_user: name='' host='localhost' state=absent
+- name: Remove MySQL anonymous users for hostname
+  mysql_user: name='' host={{ ansible_hostname }} state=absent
+- name: Remove test DB
+  mysql_db: name=test state=absent
+- name: Set IPV6 root pass
+  mysql_user: name=root password={{ mysql_root_pass }} host="::1" # "
+- name: Set 127.0.0.1 root pass
+  mysql_user: name=root password={{ mysql_root_pass }} host="127.0.0.1"
+- name: Set host root pass
+  mysql_user: name=root password={{ mysql_root_pass }} host={{ ansible_hostname }}
+- name: Create aegir account
+  shell: mysql -u=root -p{{ mysql_root_pass }} -e "Create USER {{ aegir_username }}@'{{ aegir_server_ip }}' IDENTIFIED BY '{{ aegir_password }}';" # "
+- name: grant full access to aegir account
+  shell: mysql -u=root -p{{ mysql_root_pass }} -e "GRANT ALL PRIVILEGES ON *.* TO root@{{ aegir_server_ip }} IDENTIFIED BY '{{ aegir_password }}' WITH GRANT OPTION"; # "
+- name: Flush database permissions
+  shell: mysql -u=root -p{{ mysql_root_pass }} -e "FLUSH PRIVILEGES;" 

@@ -1,0 +1,4 @@
+aegir_user: aegir
+aegir_uid: 150
+aegir_home: /var/aegir
+aegir_group: www-data

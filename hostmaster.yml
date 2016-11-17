@@ -1,0 +1,4 @@
+- hosts: hostmaster
+  tasks:
+  - name: Install drush
+    yum: name=php-drush-drush.noarch state=present

@@ -1,0 +1,33 @@
+---
+# file: roles/common/tasks/main.yml
+- name: Install apache
+  yum: name=httpd state=present
+- name: Enable and start apache
+  service: name=httpd enabled=yes
+- name: Modify apache user
+  user: name=apache groups=aegir
+- name: Modify aegir user
+  user: name=aegir groups=apache
+- name: Install required packages
+  yum: name={{ item }} state=present
+  with_items:
+    - php
+    - php-mysql
+    - php-cli
+    - php-gd
+    - php-process
+    - php-xml
+    - sudo
+    - rsync
+    - git
+    - postfix
+    - zip
+    - unzip
+- name: Configure php memory settings
+  lineinfile: dest=/etc/php.ini line="memory_limit = 192M" regexp="^memory_limit"
+- name: Configure php timezone
+  lineinfile: dest=/etc/php.ini line='date.timezone = Europe/London' regexp='^.*date.timezone ='
+- name: configure hosts file
+  lineinfile: dest=/etc/hosts line="{{ ansible_default_ipv4['address'] }}  {{ aegir_fqdn }}"
+
+
