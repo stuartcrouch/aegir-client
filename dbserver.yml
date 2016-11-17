@@ -7,8 +7,10 @@
       private: yes
     - name: aegir_server_ip
       prompt: "Please enter the IP address of the aegir master server"
+      private: no
     - name: aegir_username
       prompt: "Please enter the username that aegir will use to connect (aegir recommends 'root')"
+      private: no
     - name: aegir_password
       prompt: "Please enter the password that aegir will use to connect"
       private: yes
