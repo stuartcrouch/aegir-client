@@ -1,5 +1,10 @@
 ---
 # file: aeigr.yml
+vars_prompt:
+    - name: aegir_server_ip
+      prompt: "Please enter the IP address of the aegir master server"
+      private: no
+
 - include: webservers.yml
 - include: dbserver.yml
 - include: hostmaster.yml
