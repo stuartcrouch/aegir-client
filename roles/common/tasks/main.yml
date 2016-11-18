@@ -6,6 +6,4 @@
   file: path={{ aegir_home }} mode=755
 - name: create a ssh dir
   file: path={{ aegir_home }}/.ssh state=directory
-- name: Register aegir server with this client (register its public_key)
-  # TODO: Replace this hardcoded URL with the user submitted IP address (once the aegir server config allows it)
-  shell: "wget -O - -o /dev/null http://aigersac76.westeurope.cloudapp.azure.com/public_key/id_rsa.pub >> {{ aegir_home }}/.ssh/authorized_keys"
+

@@ -9,3 +9,6 @@
 - name: Create sudoers config
   copy: dest=/etc/sudoers.d/aegir src=aegir_sudoers mode=0400
 - debug: var=hostmasterinstall.stdout_lines
+- name: Register aegir server at {{ aegir_server_ip }} with this client (register its public_key)
+  # TODO: Replace this hardcoded URL with the user submitted IP address {{ aegir_server_ip }}(once the aegir server config allows it)
+  shell: "wget -O - -o /dev/null http://aigersac76.westeurope.cloudapp.azure.com/public_key/id_rsa.pub >> {{ aegir_home }}/.ssh/authorized_keys"
