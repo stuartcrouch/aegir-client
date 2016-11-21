@@ -1,7 +1,12 @@
 - hosts: hostmaster
+
+  vars_prompt:
+    - name: aegir_public_key
+      prompt: "Please enter the url of the public key for the master server (the machine that will control this machine)"
+      private: no
   tasks:
   - name: Install drush
     yum: name=php-drush-drush.noarch state=present
-  - name: Register aegir server at {{ aegir_server_ip }} with this client (register its public_key)
+  - name: Registering key at {{ aegir_public_key }} with this client
     # TODO: Replace this hardcoded URL with the user submitted IP address {{ aegir_server_ip }}(once the aegir server config allows it)
-    shell: "wget -O - -o /dev/null http://aigersac76.westeurope.cloudapp.azure.com/public_key/id_rsa.pub >> {{ aegir_home }}/.ssh/authorized_keys"
+    shell: "wget -O - -o /dev/null {{ aegir_public_key }} >> {{ aegir_home }}/.ssh/authorized_keys"
