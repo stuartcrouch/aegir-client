@@ -7,6 +7,6 @@
   tasks:
   - name: Install drush
     yum: name=php-drush-drush.noarch state=present
-  - name: Registering key at {{ aegir_public_key }} with this client
-    # TODO: Replace this hardcoded URL with the user submitted IP address {{ aegir_server_ip }}(once the aegir server config allows it)
-    shell: "wget -O - -o /dev/null {{ aegir_public_key }} >> {{ aegir_home }}/.ssh/authorized_keys"
+#  - name: Registering key at {{ aegir_public_key }} with this client
+#    # TODO: Replace this hardcoded URL with the user submitted IP address {{ aegir_server_ip }}(once the aegir server config allows it)
+#    shell: "wget -O - -o /dev/null {{ aegir_public_key }} >> {{ aegir_home }}/.ssh/authorized_keys"
