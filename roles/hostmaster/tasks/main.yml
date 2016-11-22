@@ -1,5 +1,7 @@
 ---
-# File: roles/hostmaster/tasks/main.yml
+ File: roles/hostmaster/tasks/main.yml
+- name: Install drush
+  yum: name=php-drush-drush.noarch state=present
 - name: Cache clear
   command: /bin/drush cache-clear drush
   become: yes
@@ -8,9 +10,9 @@
   file: path=/etc/httpd/conf.d/aegir.conf src=/var/aegir/config/apache.conf state=link force=yes
 - name: Create sudoers config
   copy: dest=/etc/sudoers.d/aegir src=aegir_sudoers mode=0400
-- debug: var=hostmasterinstall.stdout_lines
 - name: Registering key at {{ aegir_public_key }} with this client
   get_url:
-    url: {{ aegir_public_key }} 
-    dest: {{ aegir_home }}/.ssh/authorized_keys
-    file: path={{ aegir_home }}/.ssh/authorized_keys owner={{ aegir_user }} group={{ aegir_user }}
+    url: "{{ aegir_public_key }}"
+    dest: "{{ aegir_home }}/.ssh/authorized_keys"
+- name: Ensure public key is readable by aegir account
+  file: path={{ aegir_home }}/.ssh/authorized_keys owner={{ aegir_user }} group={{ aegir_user }}
