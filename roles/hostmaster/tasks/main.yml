@@ -1,13 +1,13 @@
 ---
- File: roles/hostmaster/tasks/main.yml
+# File: roles/hostmaster/tasks/main.yml
 - name: Install drush
   yum: name=php-drush-drush.noarch state=present
 - name: Cache clear
   command: /bin/drush cache-clear drush
   become: yes
   become_user: aegir
-- name: Create symlink for apache config
-  file: path=/etc/httpd/conf.d/aegir.conf src=/var/aegir/config/apache.conf state=link force=yes
+#- name: Create symlink for apache config
+#  file: path=/etc/httpd/conf.d/aegir.conf src=/var/aegir/config/apache.conf state=link force=yes
 - name: Create sudoers config
   copy: dest=/etc/sudoers.d/aegir src=aegir_sudoers mode=0400
 - name: Registering key at {{ aegir_public_key }} with this client
